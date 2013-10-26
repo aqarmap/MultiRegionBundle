@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <parameters>
+        <parameter key="multi_region.router.class">Aqarmap\Bundle\MultiRegionBundle\Router\MultiRegionRouter</parameter>
+        <parameter key="multi_region.loader.class">Aqarmap\Bundle\MultiRegionBundle\Router\MultiRegionLoader</parameter>
+        <parameter key="multi_region.router_listener.class">Aqarmap\Bundle\MultiRegionBundle\EventListener\RouterListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="multi_region.router" class="%multi_region.router.class%" parent="router.default" public="false">
+            <call method="setLoaderServiceId">
+                <argument>multi_region.loader</argument>
+            </call>
+            <call method="setRegions">
+                <argument>%multi_region.regions%</argument>
+            </call>
+            <call method="setDefaultRegion">
+                <argument>%multi_region.default_region%</argument>
+            </call>
+        </service>
+
+        <service id="multi_region.loader" class="%multi_region.loader.class%">
+            <argument>%multi_region.regions%</argument>
+        </service>
+
+        <service id="multi_region.router_listener" class="%multi_region.router_listener.class%">
+            <argument>%multi_region.regions%</argument>
+            <argument>%multi_region.default_region%</argument>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+
+</container>

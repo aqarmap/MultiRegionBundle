@@ -1,0 +1,20 @@
+{
+    "name": "aqarmap/multi-region-bundle",
+    "description": "Multi region bundle for Symfony2 that allow you to create multi-region application.",
+    "keywords": ["multi-regional", "multilingual", "routing"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Khaled Attia",
+            "email": "khaledattia@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "symfony/framework-bundle": "~2.3"
+    },
+    "autoload": {
+        "psr-0": { "Aqarmap\\Bundle\\MultiRegionBundle": "" }
+    },
+    "target-dir": "Aqarmap/Bundle/MultiRegionBundle"
+}
